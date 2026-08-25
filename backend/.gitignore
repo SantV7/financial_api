@@ -23,3 +23,5 @@ out/
 
 
 coverage/
+
+/src/generated/prisma
