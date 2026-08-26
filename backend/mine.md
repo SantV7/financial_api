@@ -4,8 +4,13 @@
 [X] - TypeScript 
 [X] - dotenv
 
-[] - POST /users : { [X] - create, [X] - read, [X] - update and [X] - delete}
-[X] - POST /login
+
+[X] - POST /login ( Login User)
+[X] - POST /signup ( Create User )
+[X] - GET /users : list/read
+[X] - POST /users : create
+[X] - POST /users : update
+[X] - DELETE /users : delete
 [] - POST /transactions
 [] - GET /transactions
 [] - GET /transactions/:id
