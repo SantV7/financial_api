@@ -5,12 +5,13 @@
 [X] - dotenv
 
 
-[X] - POST /login ( Login User)
-[X] - POST /signup ( Create User )
+[X] - POST /login
+[X] - POST /signup 
 [X] - GET /users : list/read
 [X] - POST /users : create
-[X] - POST /users : update
-[X] - DELETE /users : delete
+[] - POST /users : update
+[] - DELETE /users : delete
+
 [] - POST /transactions
 [] - GET /transactions
 [] - GET /transactions/:id

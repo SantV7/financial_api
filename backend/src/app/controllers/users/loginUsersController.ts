@@ -1,13 +1,15 @@
 import { type Request, type Response } from 'express';
+import bcrypt from 'bcrypt';
 import type { ReqAuthLogin } from '../../../types/users/users.ts';
 import { prisma } from '../../../../database/config.ts';
+
 
 export const LoginUserControl = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body as ReqAuthLogin;
 
     const user = await prisma.user.findUnique({
-        where: {email},
+        where: { email },
         select: {
             name: true,
             email: true,
@@ -17,11 +19,11 @@ export const LoginUserControl = async (req: Request, res: Response) => {
 
     if (!user) {
         return res.status(401).json({message: 'E-mail ou Senha incorretas.'});
-    }
+    };
 
     if (user.password !== password) {
         return res.status(401).json({ message: 'E-mail ou senha incorretos.' });
-    }
+    };
 
 
     return res.status(200).json({

@@ -10,5 +10,14 @@ export interface ReqCreateUsers {
     password: string ;
 };
 
+export interface AuthToken {
+    name: string ; 
+    email: string ; 
+    password: string ;
+};
+
+
+
+
 
 

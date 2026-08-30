@@ -1,5 +1,6 @@
 import { type Request, type Response } from 'express';
 import bcrypt from 'bcrypt';
+
 import { prisma } from '../../../../database/config.ts';
 import type { ReqCreateUsers } from '../../../types/users/users.ts';
 
@@ -12,7 +13,7 @@ export const CreateUserControl = async (req: Request, res: Response) => {
     });
 
     if (userExists) {
-      return res.status(409).json({ message: 'Usuiário ja tem um E-mail cadastrado.' });
+      return res.status(409).json({ message: 'Usuário ja tem um E-mail cadastrado.' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
