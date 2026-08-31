@@ -5,4 +5,4 @@ import { LoginUserControl } from "../../controllers/users/loginUsersController.t
 export const loginUserRouter = Router();
 
 
-loginUserRouter.post('/login', LoginUser,  LoginUserControl);
+loginUserRouter.post('/login', LoginUser, LoginUserControl);
