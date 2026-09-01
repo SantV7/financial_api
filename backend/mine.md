@@ -10,7 +10,7 @@
 [X] - GET /users : list/read
 [X] - POST /users : create
 [] - POST /users : update
-[] - DELETE /users : delete
+[X] - DELETE /users : delete
 
 [] - POST /transactions
 [] - GET /transactions

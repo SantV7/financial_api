@@ -6,20 +6,29 @@ import { prisma } from '../../../database/config.ts';
 
 export const authUserToken = async (req: Request, res: Response) => {
 
-    const { name, email, password } = req.body as AuthToken;
+    const { name, email } = req.body as AuthToken;
+
+    let whereData = {}
+
+    if(email) {
+      whereData = { email };
+    } else if (name) {
+      whereData = { name };
+    } else {
+      return res.status(401).json({message: 'We need E-mail or Passowrd.'})
+    }
 
     const verifyUser = await prisma.user.findFirst({
-        where: { 
-          OR: [
-            { email },
-            { name }
-          ]
-        }
+      where: whereData,
+      select: {
+        name: true,
+        email: true
+      }
     });
 
     if(!verifyUser) {
         return res.status(401).json({error: 'User not found!'});
-    }
+    };
     
-    return res.status(200).json({message: 'User exists!'});
+    return res.status(200).json({user: verifyUser});
 };
