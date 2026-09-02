@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt';
 import { prisma } from '../../../database/config.ts';
 import jwt from 'jsonwebtoken';
 
-
 export const authUserToken = async (req: Request, res: Response) => {
 
     const { name, email, password } = req.body as AuthToken;
@@ -14,15 +13,8 @@ export const authUserToken = async (req: Request, res: Response) => {
     }
 
     const verifyUser = await prisma.user.findFirst({
-      where: {
-        name,
-        email
-      },
-      select: {
-        name : true,
-        email : true,
-        password: true
-      }
+      where: { name, email },
+      select: { id: true, name : true, email : true, password: true}
     });
 
     if(!verifyUser) {
@@ -34,9 +26,14 @@ export const authUserToken = async (req: Request, res: Response) => {
     if (!checkPassword) {
       return res.status(401).json({error: 'Invalid password!'});
     };
+
+    const token = jwt.sign({id: verifyUser.id}, process.env.JWT_CRYPT as string, {
+      expiresIn: '7d'
+    });
     
     return res.status(200).json({user: {
       name: verifyUser.name,
       email: verifyUser.email
-    }});
+    }, token: token
+  });
 };
