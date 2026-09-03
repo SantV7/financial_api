@@ -2,31 +2,26 @@ import crypto from 'crypto';
 
 const algorithm = 'aes-256-ctr';
 const secretKey = process.env.CRYPTO_KEY as string;
-const iv = crypto.randomBytes(16);
 
-export function encrypt (text: string) {
-    const cipher = crypto.createCipheriv(algorithm, Buffer.from(secretKey), iv);
+export function encrypt(text: string) {
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv(algorithm, Buffer.from(secretKey, 'hex'), iv);
+  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
 
-    const encrypted = Buffer.concat([cipher.update(text.toString()), cipher.final()]);
+  return `${iv.toString('hex')}:${encrypted.toString('hex')}`;
+}
 
-    return {
-        iv: iv.toString(),
-        content: encrypted.toString('hex'),
-    };
-};
 
 export const decrypt = (hash: string) => {
-    const [newIv, text] = hash.split(':');
+  const [newIv, text] = hash.split(':');
 
-    const decipher = crypto.createDecipheriv(
-        algorithm,
-        secretKey,
-        Buffer.from(newIv, 'hex')
-    );
+  const decipher = crypto.createDecipheriv(
+    algorithm,
+    Buffer.from(secretKey, 'hex'),
+    Buffer.from(newIv, 'hex')
+  );
+  
+  const decrypted = Buffer.concat([decipher.update(Buffer.from(text, 'hex')), decipher.final()]);
 
-    const decrypted = Buffer.concat(
-        [decipher.update(Buffer.from(text, 'hex')), decipher.final()]
-    );
-
-    return decrypted.toString();
+  return decrypted.toString();
 };

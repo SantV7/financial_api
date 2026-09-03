@@ -3,6 +3,7 @@ import type { AuthToken } from '../../types/users/users.ts';
 import bcrypt from 'bcrypt';
 import { prisma } from '../../../database/config.ts';
 import jwt from 'jsonwebtoken';
+import { encrypt, decrypt } from '../utils/crypt.ts';
 
 export const authUserToken = async (req: Request, res: Response) => {
 
@@ -27,7 +28,9 @@ export const authUserToken = async (req: Request, res: Response) => {
       return res.status(401).json({error: 'Invalid password!'});
     };
 
-    const token = jwt.sign({id: verifyUser.id}, process.env.JWT_CRYPT as string, {
+    const encryptedId = encrypt(String(verifyUser.id))
+
+    const token = jwt.sign({ id: encryptedId}, process.env.JWT_CRYPT as string, {
       expiresIn: '7d'
     });
     

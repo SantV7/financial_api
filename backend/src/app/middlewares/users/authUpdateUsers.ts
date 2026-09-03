@@ -1,6 +1,3 @@
-
-import { prisma } from '../../../../database/config.ts';
-
 import { type NextFunction, type Request, type Response } from 'express';
 
 export const updateUserAuth = async (req: Request, res: Response, next: NextFunction) => {

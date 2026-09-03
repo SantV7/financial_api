@@ -16,6 +16,12 @@ export interface AuthToken {
     password: string ;
 };
 
+export interface ReqUpdateUser {
+    name: string ; 
+    age: number ;
+    email: string ; 
+    password: string ;
+};
 
 
 
