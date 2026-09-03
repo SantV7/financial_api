@@ -1,15 +1,27 @@
 import { type NextFunction, type Request, type Response } from 'express';
+import type { ReqUpdateUser } from '../../../types/users/users.ts';
 
-export const updateUserAuth = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params as { id : string };
+export const updateUsersAuth = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { age, email, password } = req.body as ReqUpdateUser;
 
-  if(!id) {
-    return res.status(404).json({message: 'Não é possível editar o usuário(a).'})
-  };
+    if (age !== undefined && (typeof age !== 'number' || age < 18)) {
+      return res.status(400).json({message: 'O usuário deve ser maior de idade (idade mínima: 18).'});
+    }
 
-  if(typeof(id) !== "string") {
-    return res.status(400).json({message: "O id do usuário deve string."})
+    if (email !== undefined) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (typeof email !== 'string' || !emailPattern.test(email)) {
+        return res.status(400).json({ message: 'Informe um e-mail válido.' });
+      }
+    }
+
+    if (password !== undefined && (typeof password !== 'string' || password.length < 8)) {
+      return res.status(400).json({ message: 'A senha deve ter pelo menos 8 caracteres.' });
+    }
+
+    return next();
+  } catch (err) {
+    return res.status(500).json({ message: 'Erro interno do servidor.' });
   }
-
-  return next();
 };

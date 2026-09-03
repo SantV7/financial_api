@@ -3,7 +3,7 @@ import { type NextFunction, type Request, type Response } from 'express';
 export const CreateUserAuth = (req: Request, res: Response, next: NextFunction) => {
   const { name, age, email, password } = req.body;
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+/;
+  
 
   if (!name || typeof name !== 'string' || name.trim().length < 3) {
     return res.status(400).json({ message: 'Informe um nome válido (mínimo de 3 caracteres).' });
