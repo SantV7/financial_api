@@ -3,14 +3,15 @@
 [X] - PostgreSQL 
 [X] - TypeScript 
 [X] - dotenv
+[x] - JWT
+[X] - BCRYPT
 
 
 [X] - POST /login
 [X] - POST /signup 
-[X] - GET /users : list/read
-[X] - POST /users : create
-[] - POST /users : update
-[X] - DELETE /users : delete
+[X] - GET /users =
+[X] - POST /users 
+[X] - DELETE /users 
 
 [] - POST /transactions
 [] - GET /transactions
