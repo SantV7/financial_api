@@ -10,7 +10,7 @@ export const deleteControler = async (req: Request, res: Response) => {
     });
 
     if(!userValidator) {
-        return res.status(404).json({message: 'User not found.'})
+      return res.status(404).json({message: 'User not found.'})
     };
 
     await prisma.user.delete({

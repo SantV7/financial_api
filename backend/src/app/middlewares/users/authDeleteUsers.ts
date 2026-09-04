@@ -1,26 +1,18 @@
-import { prisma } from '../../../../database/config.ts';
-
 import { type NextFunction, type Request, type Response } from 'express';
 
 export const DeleteUserAuth = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params as { id : string };
 
-  if(!id) {
-    return res.status(404).json({message: 'Erro interno ao encontrar o usuário(a).'})
-  };
+  try {
+    if(typeof(id) !== "string" || !id) {
+      return res.status(400).json({message: "O id do usuário deve string."})
+    };
 
-  if(typeof(id) !== "string") {
-    return res.status(400).json({message: "O id do usuário deve string."})
-  }
+      return next();
       
-  const authId = await prisma.user.findUnique({
-    where: { id },
-    select: { id: true }
-  });
-
-  if(!authId) {
-    res.status(404).json({message: 'Usuário não encontrado.'})
+  } catch (err) {
+    return res.status(500).json({
+      message: 'Erro interno no servidor.'
+    });
   };
-
-  return next();
 };
