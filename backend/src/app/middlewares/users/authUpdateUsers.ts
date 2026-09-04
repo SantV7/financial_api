@@ -3,7 +3,11 @@ import type { ReqUpdateUser } from '../../../types/users/users.ts';
 
 export const updateUsersAuth = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { age, email, password } = req.body as ReqUpdateUser;
+    const { name, age, email, password } = req.body as ReqUpdateUser;
+
+    if (name !== undefined && (typeof name !== 'string' || name.trim().length < 3)) {
+      return res.status(400).json({ message: 'Informe um nome válido (mínimo de 3 caracteres).' });
+    }
 
     if (age !== undefined && (typeof age !== 'number' || age < 18)) {
       return res.status(400).json({message: 'O usuário deve ser maior de idade (idade mínima: 18).'});

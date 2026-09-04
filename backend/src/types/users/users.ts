@@ -17,10 +17,10 @@ export interface AuthToken {
 };
 
 export interface ReqUpdateUser {
-    name: string ; 
-    age: number ;
-    email: string ; 
-    password: string ;
+    name?: string ; 
+    age?: number ;
+    email?: string ; 
+    password?: string ;
 };
 
 
