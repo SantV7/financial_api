@@ -5,6 +5,7 @@ import { authTokenRoute } from './app/routes/users/authTokenRoute.ts';
 import { updateUserRouter } from './app/routes/users/updateUsersRouter.ts';
 import { listUserRouter } from './app/routes/users/listUsersRouter.ts';
 import { deleteUserRouter } from './app/routes/users/deleteUsersRouter.ts';
+import { createTransactionsRoute } from './app/routes/transactions/createTransactions.ts';
 
 export const app: Express = express();
 
@@ -16,6 +17,8 @@ app.use(listUserRouter);
 app.use(authTokenRoute);
 app.use(updateUserRouter);
 app.use(deleteUserRouter);
+
+app.use(createTransactionsRoute);
 
 
 app.get('/', (req: Request, res: Response) => {

@@ -1,31 +1,10 @@
 import type { Request, Response } from "express";
-import type { ReqCreateTransaction } from "../../../types/transactions/transaction.ts";
 import { prisma } from "../../../../database/config.ts";
 
-export const createTransaction = async (
-  req: Request<{}, {}, ReqCreateTransaction>,
-  res: Response
-) => {
+export const createTransaction = async (req: Request, res: Response) => {
   try {
-    const { id, balance, invoice } = req.body ;
-
-    if (!id) {
-      return res.status(400).json({
-        message: "Id is required to do a transaction.",
-      });
-    };
-
-    if (balance === undefined || balance < 0) {
-      return res.status(400).json({
-        message: "Balance can't be less than 0.",
-      });
-    };
-
-    if (invoice === undefined || invoice < 0) {
-      return res.status(400).json({
-        message: "Invoice can't be a negative value.",
-      });
-    };
+    const { balance, invoice } = req.body;
+    const { id } = req.params;
 
     const formattedInvoice = Number(invoice.toFixed(2));
 
@@ -43,5 +22,5 @@ export const createTransaction = async (
     });
   } catch (err) {
     return res.status(500).json({ message: "Internal server error." });
-  };
+  }
 };
