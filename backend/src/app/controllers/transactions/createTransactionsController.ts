@@ -7,13 +7,13 @@ export const createTransaction = async (
   res: Response
 ) => {
   try {
-    const { id, balance, invoice } = req.body;
+    const { id, balance, invoice } = req.body ;
 
     if (!id) {
       return res.status(400).json({
         message: "Id is required to do a transaction.",
       });
-    }
+    };
 
     if (balance === undefined || balance < 0) {
       return res.status(400).json({
