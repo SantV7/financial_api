@@ -21,14 +21,20 @@ export const CreateUserAuth = (req: Request, res: Response, next: NextFunction) 
     return res.status(400).json({ message: 'O e-mail deve ter no máximo 256 caracteres.' });
   };
 
-  const [localPart] = email.split("@");
+  const [localPart, domainPart] = email.split("@");
 
   if(localPart.length > 60) {
     return res.status(400).json({message: "Email não pode ser maior que 60 caracteres."});
   };
 
+  const varsEmail: string[] = ['outlook.com', "gmail.com", 'hotmail.com'];
+
+  if(!varsEmail.includes(domainPart)) {
+    return res.status(400).json({message: "A extensão de Email não é valida."});
+  };
+
   if (!password || typeof password !== 'string' || password.length < 8) {
-    return res.status(400).json({ message: 'A senha deve ter pelo menos 8 caracteres.' });
+    return res.status(400).json({ message: 'A senha deve ter pelo menos 8 caracteres.'});
   };
 
   return next();
