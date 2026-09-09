@@ -17,6 +17,16 @@ export const CreateUserAuth = (req: Request, res: Response, next: NextFunction) 
     return res.status(400).json({ message: 'Informe um e-mail válido.' });
   };
 
+  if(email.length > 256) {
+    return res.status(400).json({ message: 'O e-mail deve ter no máximo 256 caracteres.' });
+  };
+
+  const [localPart] = email.split("@");
+
+  if(localPart.length > 60) {
+    return res.status(400).json({message: "Email não pode ser maior que 60 caracteres."});
+  };
+
   if (!password || typeof password !== 'string' || password.length < 8) {
     return res.status(400).json({ message: 'A senha deve ter pelo menos 8 caracteres.' });
   };
