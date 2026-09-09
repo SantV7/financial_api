@@ -23,6 +23,10 @@ export const CreateUserAuth = (req: Request, res: Response, next: NextFunction) 
 
   const [localPart, domainPart] = email.split("@");
 
+  if(localPart.length <= 0) {
+    res.status(400).json({message: "Deve haver ao menos um caractere antes do @"});
+  };
+
   if(localPart.length > 60) {
     return res.status(400).json({message: "Email não pode ser maior que 60 caracteres."});
   };
