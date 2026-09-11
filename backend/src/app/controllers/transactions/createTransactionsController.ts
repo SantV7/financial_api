@@ -10,7 +10,7 @@ export const createTransaction = async (req: Request, res: Response) => {
     
     const newTransaction = await prisma.transaction.create({
       data: {
-        userId: id,
+        userId: id as string,
         balance,
         invoice: formattedInvoice,
       },
