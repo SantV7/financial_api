@@ -27,12 +27,18 @@ app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
     "msg": "Hello :) this is my first API",
     "using": {
-        "prisma": "It's an ORM",
-        "node": "TypeScript and Express",
-        "database": "SQL and PostgreSQL",
-        "security": "JWT, bcrypt, validations and authentication"
-    }
+      "prisma": "An ORM",
+      "node": "TypeScript and Express",
+      "database": "PostgreSQL",
+      "security": "JWT, bcrypt, validation and authentication"
+    },
+    "learnings": [
+      "Clean architecture by separating Middlewares and Controllers",
+      "Domain-driven design rules for immutable financial records",
+      "Database relations, schemas, and type generation with Prisma",
+      "Route parameter handling and HTTP status code standards",
+      "Strict TypeScript typing across API endpoints"
+    ]
   });
 });
-
 
