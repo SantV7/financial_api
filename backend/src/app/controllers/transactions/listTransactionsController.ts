@@ -1,24 +1,26 @@
 import type { Request, Response } from "express";
 import { prisma } from "../../../../database/config.ts";
 
-export const createTransaction = async (req: Request, res: Response) => {
+export const listTransaction = async (req: Request, res: Response) => {
   try {
-    const { balance, invoice } = req.body;
     const { id } = req.params;
 
-    const formattedInvoice = Number(invoice.toFixed(2));
-    
-    const newTransaction = await prisma.transaction.create({
-      data: {
-        userId: id,
-        balance,
-        invoice: formattedInvoice,
+    const listData = await prisma.transaction.findMany({
+      where: { userId: id as string },
+      select: {
+        balance: true,
+        invoice: true,
+        user: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
 
-    return res.status(201).json({
-      message: "Transaction has been successful!",
-      transaction: newTransaction,
+    return res.status(200).json({
+      message: "Transactions retrieved successfully!",
+      listData,
     });
   } catch (err) {
     return res.status(500).json({ message: "Internal server error." });
