@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { prisma } from "../../../../database/config.ts";
 
-export const listTransaction = async (req: Request, res: Response) => {
+export const listTransactionControler = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 

@@ -6,6 +6,7 @@ import { updateUserRouter } from './app/routes/users/updateUsersRouter.ts';
 import { listUserRouter } from './app/routes/users/listUsersRouter.ts';
 import { deleteUserRouter } from './app/routes/users/deleteUsersRouter.ts';
 import { createTransactionsRoute } from './app/routes/transactions/createTransactions.ts';
+import { listTransactionsRoute } from './app/routes/transactions/listTransaction.ts';
 
 export const app: Express = express();
 
@@ -19,15 +20,17 @@ app.use(updateUserRouter);
 app.use(deleteUserRouter);
 
 app.use(createTransactionsRoute);
+app.use(listTransactionsRoute)
 
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
-    "msg": "It's your first API",
+    "msg": "Hello :) this is my first API",
     "using": {
         "prisma": "It's an ORM",
         "node": "TypeScript and Express",
-        "database": "SQL and PostgreSQL"
+        "database": "SQL and PostgreSQL",
+        "security": "JWT, bcrypt, validations and authentication"
     }
   });
 });
