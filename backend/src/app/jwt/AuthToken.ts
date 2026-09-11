@@ -3,7 +3,7 @@ import type { AuthToken } from '../../types/users/users.ts';
 import bcrypt from 'bcrypt';
 import { prisma } from '../../../database/config.ts';
 import jwt from 'jsonwebtoken';
-import { encrypt, decrypt } from '../utils/crypt.ts';
+import { encrypt } from '../utils/crypt.ts';
 
 export const authUserToken = async (req: Request, res: Response) => {
 
