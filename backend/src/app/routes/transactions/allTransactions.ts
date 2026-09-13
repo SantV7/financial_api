@@ -4,5 +4,5 @@ import { allTransactionControler } from "../../controllers/transactions/allTrans
 
 export const allTransactionsRoute = Router();
 
-allTransactionsRoute.get('/transactions/:id', authAllTransaction, allTransactionControler );
+allTransactionsRoute.get('/transactions/all/:id', authAllTransaction, allTransactionControler );
 

@@ -7,6 +7,7 @@ import { listUserRouter } from './app/routes/users/listUsersRouter.ts';
 import { deleteUserRouter } from './app/routes/users/deleteUsersRouter.ts';
 import { createTransactionsRoute } from './app/routes/transactions/createTransactions.ts';
 import { listTransactionsRoute } from './app/routes/transactions/listTransaction.ts';
+import { allTransactionsRoute } from './app/routes/transactions/allTransactions.ts';
 
 export const app: Express = express();
 
@@ -21,6 +22,7 @@ app.use(deleteUserRouter);
 
 app.use(createTransactionsRoute);
 app.use(listTransactionsRoute)
+app.use(allTransactionsRoute)
 
 
 app.get('/', (req: Request, res: Response) => {
