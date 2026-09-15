@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { deleteControler } from "../../controllers/users/deleteUsersController.ts";
-import { DeleteUserAuth } from "../../middlewares/users/authDeleteUsers.ts";
+import { verifyJwt } from "../../middlewares/users/verifyJwt.ts";
 
 export const deleteUserRouter = Router();
 
-deleteUserRouter.delete('/users/:id', DeleteUserAuth,deleteControler);
+deleteUserRouter.delete('/users/:id',verifyJwt,deleteControler);

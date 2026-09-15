@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { updateUsersAuth } from "../../middlewares/users/authUpdateUsers.ts";
 import { updateUserControl } from "../../controllers/users/updateUsersController.ts";
+import { verifyJwt } from "../../middlewares/users/verifyJwt.ts";
 
 export const updateUserRouter = Router();
 
-updateUserRouter.put('/users/:id', updateUsersAuth, updateUserControl );
+updateUserRouter.put('/users/:id', verifyJwt, updateUserControl );

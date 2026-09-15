@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { ListUserAuth } from "../../middlewares/users/authListUsers.ts";
 import { ListUserControl } from "../../controllers/users/listUsersController.ts";
+import { verifyJwt } from "../../middlewares/users/verifyJwt.ts";
 
 export const listUserRouter = Router();
 
-listUserRouter.get('/users/:id', ListUserAuth, ListUserControl);
+listUserRouter.get('/users/:id', verifyJwt, ListUserControl);
