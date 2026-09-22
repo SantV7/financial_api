@@ -1,22 +1,14 @@
 import express, { type Express, type Request, type Response } from 'express';
-import { loginUserRouter } from './app/routes/users/loginUsersRouter.ts';
-import { createUserRouter } from './app/routes/users/createUsersRouter.ts';
-import { updateUserRouter } from './app/routes/users/updateUsersRouter.ts';
-import { listUserRouter } from './app/routes/users/listUsersRouter.ts';
-import { deleteUserRouter } from './app/routes/users/deleteUsersRouter.ts';
 import { createTransactionsRoute } from './app/routes/transactions/createTransactions.ts';
 import { listTransactionsRoute } from './app/routes/transactions/listTransaction.ts';
 import { allTransactionsRoute } from './app/routes/transactions/allTransactions.ts';
+import userRoutes from './app/routes/users/user.routes.ts';
 
 export const app: Express = express();
 
 app.use(express.json());
 
-app.use(createUserRouter);
-app.use(loginUserRouter);
-app.use(listUserRouter);
-app.use(updateUserRouter);
-app.use(deleteUserRouter);
+app.use(userRoutes);
 
 app.use(createTransactionsRoute);
 app.use(listTransactionsRoute)

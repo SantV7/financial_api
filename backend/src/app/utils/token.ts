@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 
-export const decrypt = async (authHeader: string) => {
+export const decryptAuth = async (authHeader: string) => {
   const [, token] = authHeader.split(' ');
 
   const verifyAsync = promisify(jwt.verify) as (
