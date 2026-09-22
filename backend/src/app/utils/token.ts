@@ -1,11 +1,13 @@
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
-import type { Response } from 'express';
 
-export const decrypt = (hash: string, res: Response) => {
+export const decrypt = async (authHeader: string) => {
+  const [, token] = authHeader.split(' ');
 
-    if(typeof(hash) !== 'string') {
-       return res.status(400).json({message: ' O hash não pode ser diferente de string.'});
-    };
+  const verifyAsync = promisify(jwt.verify) as (
+    token: string,
+    secretOrPublicKey: jwt.Secret
+  ) => Promise<jwt.JwtPayload | string>;
 
+  return verifyAsync(token, process.env.CRYPTO_KEY as string);
 };
