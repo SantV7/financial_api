@@ -3,16 +3,8 @@ import { prisma } from '../../../../database/config.ts';
 
 
 export const ListUserControl = async (req: Request, res: Response) => {
-
-  const name = req.query.name;
-  
   try {
 
-    if(!name) {
-      console.log(`Olá...)`)
-    } else {
-      console.log(`Seja bem vindo ${name}`)
-    };
 
     const { id } = req.params as { id : string };
 
