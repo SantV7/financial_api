@@ -6,7 +6,7 @@ interface CustomRequest extends Request {
   userId?: number;
 }
 
-export const verifyJwt = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const verifyToken = async (req: CustomRequest, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {

@@ -1,23 +1,23 @@
 import { Router } from 'express';
-import { verifyJwt } from "../../middlewares/users/verifyJwt.ts";
 import { LoginUser } from '../../middlewares/users/authLoginUsers.ts'
-import { LoginUserControl } from "../../controllers/users/loginUsersController.ts";
+import { LoginUserControl } from "../../controllers/users/userController.ts";
 import { CreateUserAuth } from "../../middlewares/users/authCreateUsers.ts";
-import { CreateUserControl } from "../../controllers/users/createUsersController.ts";
-import { deleteControler } from "../../controllers/users/deleteUsersController.ts";
-import { updateUserControl } from "../../controllers/users/updateUsersController.ts";
-import { ListUserControl } from "../../controllers/users/listUsersController.ts";
+import { CreateUserControl } from "../../controllers/users/userController.ts";
+import { deleteControler } from "../../controllers/users/userController.ts";
+import { updateUserControl } from "../../controllers/users/userController.ts";
+import { ListUserControl } from "../../controllers/users/userController.ts";
+import { verifyToken } from '../../middlewares/authentification.ts';
 
 const userRoutes = Router();
 
-userRoutes.get('/users/:id', verifyJwt, ListUserControl);
+userRoutes.get('/users/:id', verifyToken, ListUserControl);
 
 userRoutes.post('/users', CreateUserAuth, CreateUserControl);
 
 userRoutes.post('/login', LoginUser, LoginUserControl);
 
-userRoutes.put('/users/:id', verifyJwt, updateUserControl);
+userRoutes.put('/users/:id', verifyToken, updateUserControl);
 
-userRoutes.delete('/users/:id', verifyJwt, deleteControler);
+userRoutes.delete('/users/:id', verifyToken, deleteControler);
 
 export default userRoutes;
